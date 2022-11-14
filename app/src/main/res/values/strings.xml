@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Wander</string>
+    <string name="login_label">Login</string>
+    <string name="email_box">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up_text">New user? Click here Sign Up.</string>
+    <string name="signup_label">Sign Up</string>
+    <string name="name_label">Name</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="log_in_text">Already a user? Log In here.</string>
+    <string name="user_file">user_details</string>
+    <string name="logout">Logout</string>
+
+</resources>
