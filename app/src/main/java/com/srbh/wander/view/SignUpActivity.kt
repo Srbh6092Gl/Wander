@@ -8,16 +8,17 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
 import com.srbh.wander.R
 import com.srbh.wander.model.User
 import com.srbh.wander.viewmodel.UserViewModel
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var mName: EditText
-    private lateinit var mEmail: EditText
-    private lateinit var mPassword: EditText
-    private lateinit var mConfirmPassword: EditText
+    private lateinit var mName: TextInputEditText
+    private lateinit var mEmail: TextInputEditText
+    private lateinit var mPassword: TextInputEditText
+    private lateinit var mConfirmPassword: TextInputEditText
     private lateinit var mSignup: Button
     private lateinit var mLoginText: TextView
 
@@ -43,10 +44,13 @@ class SignUpActivity : AppCompatActivity() {
             val password = mPassword.text.toString()
             val confirmPassword = mConfirmPassword.text.toString()
             val viewModel = UserViewModel(application)
-            if(email=="" && email==null && !Patterns.EMAIL_ADDRESS.matcher(email).matches())
-                Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
-            else if(viewModel.getUserWithEmail(email)!=null)
+            mEmail.error=null
+            if(email=="" || email==null || !Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                mEmail.error = "Use a valid email ID"
+            else if(viewModel.getUserWithEmail(email)!=null) {
+                mEmail.error = "Email ID already in use"
                 Toast.makeText(this, "Email already exist", Toast.LENGTH_SHORT).show()
+            }
             else if(!password.equals(confirmPassword))
                 Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show()
             else {

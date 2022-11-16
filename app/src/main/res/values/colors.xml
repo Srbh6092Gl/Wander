@@ -8,6 +8,7 @@
     <color name="blue_light">#509CB1</color>
     <color name="blue">#3B8BA1</color>
     <color name="blue_dark">#1F6173</color>
+    <color name="dark_accent">#72C1D6</color>
     //Teal
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
