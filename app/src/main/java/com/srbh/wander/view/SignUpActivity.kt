@@ -36,6 +36,7 @@ class SignUpActivity : AppCompatActivity() {
         mLoginText.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         mSignup.setOnClickListener{
@@ -59,6 +60,7 @@ class SignUpActivity : AppCompatActivity() {
                 //Goto login page
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
 

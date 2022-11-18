@@ -30,8 +30,12 @@ class LoginActivity : AppCompatActivity() {
         mSignUpText = findViewById(R.id.sign_up_text)
 
         mSignUpText.setOnClickListener{
+
+            //Implicit and Explicit
+            //OS 12
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         mLogin.setOnClickListener{
@@ -50,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("Name", user.name)
                     startActivity(intent)
+                    finish()
                 }
                 else
                     Toast.makeText(this, "Wrong password! Try again.", Toast.LENGTH_SHORT).show()

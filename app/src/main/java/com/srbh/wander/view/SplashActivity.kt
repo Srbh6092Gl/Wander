@@ -17,11 +17,13 @@ class SplashActivity : AppCompatActivity() {
             if(email == "") {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 val user = viewModel.getUserWithEmail(email!!)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("Name",user!!.name)
                 startActivity(intent)
+                finish()
             }
         },1000)
     }

@@ -10,5 +10,10 @@
     <string name="log_in_text">Already a user? Log In here.</string>
     <string name="user_file">user_details</string>
     <string name="logout">Logout</string>
+    <string name="profile_info_text">Your Info</string>
+    <string name="add_a_note">Add a Note</string>
+    <string name="topic_label">Topic</string>
+    <string name="description_label">Description</string>
+    <string name="add">Add</string>
 
 </resources>
