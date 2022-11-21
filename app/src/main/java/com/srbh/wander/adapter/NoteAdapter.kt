@@ -1,5 +1,7 @@
 package com.srbh.wander.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.srbh.wander.R
 import com.srbh.wander.databinding.ItemNoteBinding
 import com.srbh.wander.model.Note
+import com.srbh.wander.view.AddActivity
 import com.srbh.wander.viewmodel.NoteViewModel
 import com.srbh.wander.viewmodel.NoteViewModelFactory
 
@@ -27,8 +30,12 @@ class NoteAdapter: RecyclerView.Adapter<NoteViewHolder>(){
             viewModel.delete(noteList[position])
         }
         holder.binding.editButton.setOnClickListener{
-            //TODO: Get note from list, GOTO update activity, set all fields with note data, let user update fields,update fields in note object, call update function from view model
-            //viewModel.update(noteList[position])
+            val intent = Intent(holder.binding.root.context, AddActivity::class.java)
+            intent.putExtra("noteId",noteList[position].id)
+            intent.putExtra("noteSender",noteList[position].sender)
+            intent.putExtra("noteTopic",noteList[position].topic)
+            intent.putExtra("noteDescription",noteList[position].description)
+            holder.binding.root.context.startActivity(intent)
         }
     }
 

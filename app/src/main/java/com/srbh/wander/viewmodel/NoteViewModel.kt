@@ -33,6 +33,10 @@ class NoteViewModel(application: Application, private val noteRepo: NoteRepo): V
 
     init {
         currentUserEmail = UserViewModel(application).getCurrentUser().toString()
+        viewModelScope.launch(Dispatchers.IO) {
+            allNotes=noteRepo.getAllNote(currentUserEmail)
+            Log.i("VM", "getNotes: $currentUserEmail")
+        }
         getNotes(application)
     }
 
