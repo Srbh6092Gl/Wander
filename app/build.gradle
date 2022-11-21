@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
 }
 
 android {
@@ -30,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding{
+        enabled=true
+    }
 }
 
 dependencies {
@@ -43,12 +47,29 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     //Gson
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation "com.google.code.gson:gson:2.9.1"
 
     //Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    //AnnotationProcessor
+    kapt "androidx.lifecycle:lifecycle-common-java8:2.5.1"
+
+    //Room DB
+    //Room
+    implementation "androidx.room:room-runtime:2.4.3"
+    //Annotation Processor
+    kapt "androidx.room:room-compiler:2.4.3"
+    //Coroutines for Room
+    implementation "androidx.room:room-ktx:2.4.3"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     //Material Design
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation "com.google.android.material:material:1.7.0"
 
 }

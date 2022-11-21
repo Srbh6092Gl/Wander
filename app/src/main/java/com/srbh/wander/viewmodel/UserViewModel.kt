@@ -6,6 +6,7 @@ import com.srbh.wander.model.User
 import com.srbh.wander.repo.UserRepo
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
+
     private val repo : UserRepo
 
     init{

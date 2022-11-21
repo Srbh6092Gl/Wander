@@ -29,11 +29,14 @@ class LoginActivity : AppCompatActivity() {
         mLogin = findViewById(R.id.login_button)
         mSignUpText = findViewById(R.id.sign_up_text)
 
-        mSignUpText.setOnClickListener{
+    }
 
-            //Implicit and Explicit
-            //OS 12
+    override fun onResume() {
+        super.onResume()
+
+        mSignUpText.setOnClickListener{
             val intent = Intent(this, SignUpActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
         }
@@ -61,6 +64,5 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-
     }
 }

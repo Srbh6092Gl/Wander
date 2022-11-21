@@ -11,17 +11,19 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        val viewModel = UserViewModel(application)
+        val email = viewModel.getCurrentUser()
         Handler().postDelayed({
-            val viewModel = UserViewModel(application)
-            val email = viewModel.getCurrentUser()
             if(email == "") {
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
                 finish()
             } else {
                 val user = viewModel.getUserWithEmail(email!!)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("Name",user!!.name)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
                 finish()
             }
