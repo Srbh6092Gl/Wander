@@ -7,10 +7,12 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
+import android.os.Build
 import androidx.room.Room
 import com.srbh.wander.dao.NoteDao
 import com.srbh.wander.database.NoteDB
 import com.srbh.wander.model.Note
+import com.srbh.wander.service.NoteTableService
 import kotlinx.coroutines.CoroutineStart
 
 class NoteContentProvider: ContentProvider() {
@@ -83,6 +85,7 @@ class NoteContentProvider: ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
+        sendDbUseNotification()
         var sortBy =sortOrder
         val queryBuilder = SQLiteQueryBuilder()
         queryBuilder.tables = TABLE_NAME
@@ -105,6 +108,7 @@ class NoteContentProvider: ContentProvider() {
         }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        sendDbUseNotification()
         val rowId = noteDB!!.insert(TABLE_NAME,"", values)
         if(rowId > 0){
             val _uri = ContentUris.withAppendedId(CONTENT_URI,rowId)
@@ -115,6 +119,7 @@ class NoteContentProvider: ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
+        sendDbUseNotification()
         var count = 0
         count = when(uriMatcher!!.match(uri)) {
             URI_CODE_ALL -> noteDB!!.delete(TABLE_NAME,selection,selectionArgs)
@@ -125,6 +130,7 @@ class NoteContentProvider: ContentProvider() {
     }
 
     override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<out String>?): Int {
+        sendDbUseNotification()
         var count = 0
         count = when(uriMatcher!!.match(uri)) {
             URI_CODE_ALL -> noteDB!!.update(TABLE_NAME,values,selection,selectionArgs)
@@ -132,5 +138,15 @@ class NoteContentProvider: ContentProvider() {
         }
         context!!.contentResolver.notifyChange(uri,null)
         return count
+    }
+
+    fun sendDbUseNotification() {
+        Intent(context!!,NoteTableService::class.java).also {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                context!!.startForegroundService(it)
+            else
+                context!!.startService(it)
+        }
+
     }
 }
